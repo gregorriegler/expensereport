@@ -16,11 +16,11 @@ namespace expensereport_csharp
 
     public class ExpenseReport
     {
+        private int total;
+        private int mealExpenses;
+        
         public void PrintReport(List<Expense> expenses)
         {
-            int total = 0;
-            int mealExpenses = 0;
-
             Console.WriteLine("Expenses " + DateTime.Now);
             
             foreach (Expense expense in expenses)
@@ -29,7 +29,7 @@ namespace expensereport_csharp
                 {
                     mealExpenses += expense.amount;
                 }
-
+ 
                 String expenseName = "";
                 switch (expense.type)
                 {
