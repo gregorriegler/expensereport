@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using expensereport_csharp;
 using NUnit.Framework;
@@ -10,8 +11,14 @@ public class Tests
 {
 
     [Test]
-    public void report()
+    public void Report()
     {
+        var culture = CultureInfo.CreateSpecificCulture("en-US");
+        var dateformat = new DateTimeFormatInfo();
+        dateformat.FullDateTimePattern = "dddd, mmmm dd, yyyy h:mm:ss tt";
+        culture.DateTimeFormat = dateformat;
+        System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+        
         var consoleSpy = new StringWriter();
         Console.SetOut(consoleSpy);
         var report = new ExpenseReport();
@@ -26,7 +33,7 @@ public class Tests
         
         report.PrintReport(expenses, DateTime.MinValue);
             
-        Assert.AreEqual(@"Expenses 1/1/0001 12:00:00AM
+        Assert.AreEqual(@"Expenses 01/01/0001 00:00:00
 Dinner	5000	 
 Dinner	5001	X
 Breakfast	1000	 
