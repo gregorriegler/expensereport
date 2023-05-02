@@ -12,6 +12,12 @@ namespace expensereport_csharp
     {
         public ExpenseType type;
         public int amount;
+
+        public Expense(ExpenseType type, int amount)
+        {
+            this.type = type;
+            this.amount = amount;
+        }
     }
 
     public class ExpenseReport
@@ -19,9 +25,9 @@ namespace expensereport_csharp
         private int total;
         private int mealExpenses;
         
-        public void PrintReport(List<Expense> expenses)
+        public void PrintReport(List<Expense> expenses, DateTime dateTime)
         {
-            Console.WriteLine("Expenses " + DateTime.Now);
+            Console.WriteLine("Expenses " + dateTime);
             
             foreach (Expense expense in expenses)
             {
